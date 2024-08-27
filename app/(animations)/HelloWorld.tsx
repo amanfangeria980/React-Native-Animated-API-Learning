@@ -2,26 +2,22 @@ import { View, Animated, TouchableOpacity, Text } from "react-native";
 import React, { useState } from "react";
 const HelloWorld = () => {
     // creating a animated value
-    const leftValue = useState(new Animated.Value(1))[0];
+    const leftValue = useState(new Animated.Value(0))[0];
 
     // setting the animated value
     const fadeOutBall = () => {
         Animated.timing(leftValue, {
-            toValue: 0,
+            toValue: 500,
             duration: 4000,
             useNativeDriver: true,
         }).start();
     };
     const fadeInBall = () => {
         Animated.timing(leftValue, {
-            toValue: 1,
+            toValue: -500,
             duration: 4000,
             useNativeDriver: true,
         }).start();
-
-        setTimeout(() => {
-            for (let i = 0; i < 500000000000; i++) {}
-        }, 1000);
     };
     return (
         <View style={{ flex: 1 }}>
@@ -40,16 +36,16 @@ const HelloWorld = () => {
                             borderRadius: 100 / 2,
                             backgroundColor: "red",
                             // binding the animated value
-                            opacity: leftValue,
+                            transform: [{ translateX: leftValue }],
                             marginBottom: 10,
                         },
                     ]}
                 ></Animated.View>
                 <TouchableOpacity onPress={fadeOutBall}>
-                    <Text>Fade out the ball</Text>
+                    <Text>Move here</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={fadeInBall}>
-                    <Text>Fade in the ball</Text>
+                    <Text>Move there</Text>
                 </TouchableOpacity>
             </View>
         </View>
